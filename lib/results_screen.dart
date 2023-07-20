@@ -17,12 +17,14 @@ class ResultsScreen extends StatelessWidget {
     final List<Map<String, Object>> summary = [];
 
     for (var i = 0; i < chosenAnswers.length; i++) {
-      summary.add({
-        'question_index': i,
-        'question': questions[i].text,
-        'correct_answer': questions[i].answer[0],
-        'user_answer': chosenAnswers[i],
-      });
+      summary.add(
+        {
+          'question_index': i,
+          'question': questions[i].text,
+          'correct_answer': questions[i].answers[0],
+          'user_answer': chosenAnswers[i]
+        },
+      );
     }
 
     return summary;
@@ -46,25 +48,26 @@ class ResultsScreen extends StatelessWidget {
             Text(
               'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!',
               style: GoogleFonts.lato(
-                textStyle: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                ),
+                color: const Color.fromARGB(255, 230, 200, 253),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(
               height: 30,
             ),
-            QuestionsSummary(
-              getSummaryData(),
-            ),
+            QuestionsSummary(summaryData),
             const SizedBox(
               height: 30,
             ),
             TextButton.icon(
               onPressed: onRestart,
-              label: const Text('Restart Quiz!'),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+              ),
               icon: const Icon(Icons.refresh),
+              label: const Text('Restart Quiz!'),
             )
           ],
         ),
